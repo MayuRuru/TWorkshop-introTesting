@@ -8,7 +8,7 @@ Tendremos dos partes distintas:
  1. Account. Guarda la informacion de la cuenta en memoria.
  2. ATM. Permite al usuario modificar la Account.
 
-![Requisitos de nuestra aplicacion](./img/requisitos.png)
+![Requisitos de nuestra aplicacion](./img/requisito.png)
 
 ## Partes del taller
 
