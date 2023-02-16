@@ -1,6 +1,8 @@
-const testee = require('./atm.js');
+const atm = require('./atm.js');
 
 test("When I ask for account information, I expect to get a json with the expected information", () => {
+    // Given
+    const testee = atm.startAtmForAccount()
     // When
     const value = testee.getAccountInformation();
     //Then
@@ -8,6 +10,8 @@ test("When I ask for account information, I expect to get a json with the expect
 });
 
 test("When I call makeDeposit and then I call getAccountInformation, I expect to get a json with the expected information", () => {
+    // Given
+    const testee = atm.startAtmForAccount()
     // When
     testee.makeDeposit(20);
     //Then
