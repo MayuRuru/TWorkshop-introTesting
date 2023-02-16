@@ -65,8 +65,5 @@ test("Given I open an account, When I call blockAccount, I expect that calling s
     testee.blockAccount();
 
     // Then
-    expect(() => { 
-        testee.setAmount(23) 
-    })
-    .toThrow();
+    expect(() => { testee.setAmount(23) }).toThrow();
 });

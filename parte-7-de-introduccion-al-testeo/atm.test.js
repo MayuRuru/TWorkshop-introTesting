@@ -1,30 +1,38 @@
-const testee = require('./atm.js');
-const accountMock = require('./account.js');
+const atm = require('./atm.js');
+require('./account.js');
 
-jest.mock('./account.js');
-
+const mockGetAmount = jest.fn(() => 0);
+const mockSetAmount = jest.fn(() => {});
+jest.mock('./account.js', () => {
+    return {
+        openAccount: jest.fn(() => {
+            return {
+                getAmount: mockGetAmount,
+                setAmount: mockSetAmount
+            }
+        }),
+    };
+});
 
 test("When I ask for account information, I expect to get a json with the expected information", () => {
     // Given
-    let spy = jest.spyOn(accountMock, 'getAmount').mockImplementation(() => 0);
+    const testee = atm.startAtmForAccount()
 
     // When
     const value = testee.getAccountInformation();
+
     //Then
     expect(value).toStrictEqual({ amount: 0, isblocked: false });
-    expect(accountMock.getAmount).toHaveBeenCalled();
-
-    spy.mockRestore();
+    expect(mockGetAmount).toHaveBeenCalled();
 });
 
-test("When I call makeDeposit and then I call getAccountInformation, I expect testee to call setAmount", () => {
+test("When I call makeDeposit and then I call getAccountInformation, I expect setAmount to have been called with 20", () => {
     // Given
-    let spy = jest.spyOn(accountMock, 'getAmount').mockImplementation(() => 0);
+    const testee = atm.startAtmForAccount()
 
     // When
     testee.makeDeposit(20);
 
     //Then
-    expect(accountMock.setAmount).toHaveBeenCalledWith(20);
-    spy.mockRestore();
+    expect(mockSetAmount).toHaveBeenCalledWith(20);
 });

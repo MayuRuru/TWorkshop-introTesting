@@ -1,27 +1,27 @@
-let amount = 5;
+function openAccount () {
+  let amount = 5;
+  let isAccountBlocked = false;
 
-function getAmount() {
-  return amount;
-}
-
-function setAmount(value) {
-    if(isAccountBlocked) {
-      throw new Error('Account is blocked');
+  return {
+    getAmount: () => {
+      return amount;
+    },
+    setAmount: (value) => {
+      if(isAccountBlocked) {
+        throw new Error('Account is blocked');
+      }
+      if(isNaN(value)) {
+          throw new Error('Please introduce a number');
+      }
+      amount = value;
+    },
+    getBlockAccount: () => {
+      return isAccountBlocked;
+    },
+    blockAccount: () => {
+      isAccountBlocked = true;
     }
-    if(isNaN(value)) {
-        throw new Error('Please introduce a number');
-    }
-    amount = value;
-}
+  };
+};
 
-let isAccountBlocked = false;
-
-function getBlockAccount() {
-  return isAccountBlocked;
-}
-
-function blockAccount() {
-  isAccountBlocked = true;
-}
-
-module.exports = {getAmount, setAmount, getBlockAccount, blockAccount}
+module.exports = {openAccount}

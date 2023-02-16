@@ -1,37 +1,44 @@
-const testee = require('./account.js');
+const account = require('./account.js');
 
-test("Given I have my default Amount, When I ask for it, Then it returns 5", () => {
-    // Given: Objetos que estamos usando en nuestro test
+test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
+    // Given
+    testee = account.openAccount();
 
-    // When: Accion que estamos testeando
+    // When
     const value = testee.getAmount();
 
-    // Then: Expectativas
+    // Then
     expect(value).toBe(5);
 });
 
-test("Given I have my default Amount, When I set value to 10, Then it should return 10", () => {
-    // Given: Objetos que estamos usando en nuestro test
-    // When: Accion que estamos testeando
+test("Given I open an account, When I call setAmount with 10, Then getAmount should return 10", () => {
+    // Given
+    testee = account.openAccount();
+
+    // When
     testee.setAmount(10);
 
-    // Then: Expectativas
+    // Then
     expect(testee.getAmount()).toBe(10);
 });
 
-test("Given I have my default Amount, When I set value that is not a number, Then it should throw and error", () => {
-    // Given: Objetos que estamos usando en nuestro test
-    
-    expect(() => { 
-        // When: Accion que estamos testeando
+test("Given I open an account, When I set value that is not a number, Then it should throw and error", () => {
+    // Given
+    testee = account.openAccount();
+
+    // When
+    action = () => {
         testee.setAmount("not a number") 
-    })
-    // Then: Expectativas
-    .toThrow();
+    }
+    // Then
+    expect(action).toThrow();
 });
 
-test("When I call getBlockAccount, I expect it to return false by default", () => {
-    // Given: testee
+
+test("Given I open an account, When I call getBlockAccount, I expect it to return false by default", () => {
+    // Given
+    testee = account.openAccount();
+
     // When
     const value = testee.getBlockAccount();
 
@@ -39,14 +46,24 @@ test("When I call getBlockAccount, I expect it to return false by default", () =
     expect(value).toBe(false);
 });
 
-test("When I call blockAccount, I expect that calling setAmount with a number to return an error", () => {
-    // Given: testee
+test("Given I open an account, When I call blockAccount, I expect getBlockAccount to return true", () => {
+    // Given
+    testee = account.openAccount();
+
     // When
     testee.blockAccount();
 
     // Then
-    expect(() => { 
-        testee.setAmount(23) 
-    })
-    .toThrow();
+    expect(testee.getBlockAccount()).toBe(true);
+});
+
+test("Given I open an account, When I call blockAccount, I expect that calling setAmount with a number to return an error", () => {
+    // Given
+    testee = account.openAccount();
+
+    // When
+    testee.blockAccount();
+
+    // Then
+    expect(() => { testee.setAmount(23) }).toThrow();
 });
