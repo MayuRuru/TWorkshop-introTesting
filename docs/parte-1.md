@@ -5,11 +5,14 @@ mkdir introduccionAlTesteo
 cd introduccionAlTesteo
 ```
 
-Empezamos el proyecto creando nuestra configuracion basica. Dale a enter a todo. Cuando pida `test command` escribe `jest`.
+Empezamos el proyecto creando nuestra configuracion basica. Dale a enter a todo. Cuando pida `test command` escribe `jest`. Jest es la libreria de testeo que usaremos ya que es una de las mas usadas.
+
 ```bash
 npm init
 ```
+
 Esto deberia de crear nuestro package.json de esta forma:
+
 ```json
 {
   "name": "ejemplointroduccionaltesteo",
@@ -24,7 +27,7 @@ Esto deberia de crear nuestro package.json de esta forma:
 }
 ```
 
-Instalamos nuestra libreria de testeo de forma local y global
+Instalamos nuestra libreria de testeo de forma local y global. Veras que tras correr estos comandos, aparece configurado en nuestro `package.json`.
 ```bash
 npm install --save-dev jest
 npm install jest --global
