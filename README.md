@@ -5,7 +5,7 @@ Workshop para introduccion al testeo en Javascript
 Queremos crear un banco online. Por simplificar el ejemplo, este banco online guardara todo en memoria y solo manejara una unica cuenta bancaria.
 
 Tendremos dos partes distintas:
- 1. Account Entity. Guarda la informacion de la cuenta en memoria.
+ 1. Account. Guarda la informacion de la cuenta en memoria.
  2. ATM. Permite al usuario modificar la account entity.
 
 [Requisitos de nuestra aplicacion](./img/funcionalidades-cuenta.png)
@@ -25,6 +25,7 @@ npm install -g npm
 Crea una carpeta donde vamos a poner los ficheros del proyecto.
 ```
 mkdir introduccionAlTesteo
+cd introduccionAlTesteo
 ```
 
 Empezamos el proyecto creando nuestra configuracion basica. Dale a enter a todo. Cuando pida `test command` escribe `jest`.
@@ -83,12 +84,12 @@ expect(arrayValue).toContain(expectedValue);
 ```
 
 Escribimos el primer test en nuestro `account.test.js`. Recordad que estamos haciendo TDD, asi que lo primero es escribir el test
-1. Given I have my default Amount, When I ask for it, Then it returns 0
+1. Given I open a new account, When I call getAmount(), Then it returns 0
 
 ```javascript
 const testee = require('./account.js');
 
-test("Given I have my default Amount, When I ask for it, Then it returns 0", () => {
+test("Given I open a new account, When I call getAmount(), Then it returns 0", () => {
     // Given: testee
 
     // When
@@ -114,10 +115,10 @@ Con esto ya deberiamos de tener un test funcionando.
 
 Con esto lo unico que estamos testeando es que por defecto no tengo dinero en mi cuenta. Como queremos que nuestra aplicacion haga mas cosas, vamos a anadir mas casos de uso:
 
-1. Given I have my default Amount, When I set value to 10, Then it should return 10
+1. Given I open a new account, When I call setAmount(10), then the amount should be 10
 
 ```javascript
-test("Given I have my default Amount, When I set value to 10, Then it should return 10", () => {
+test("Given I open a new account, When I call setAmount(10), then the amount should be 10", () => {
     // Given: testee
     // When
     testee.setAmount(10);
@@ -146,13 +147,10 @@ module.exports = {getAmount, setAmount}
 ```javascript
 test("Given I have my default Amount, When I set value that is not a number, Then it should throw and error", () => {
     // Given: testee
-    
-    expect(() => { 
-        // When
-        testee.setAmount("not a number") 
-    })
-    // Then
-    .toThrow();
+    // When
+    const whenFunction = () => { testee.setAmount("not valid value") };
+    //Then
+    expect(whenFunction).toThrow();
 });
 ```
 
