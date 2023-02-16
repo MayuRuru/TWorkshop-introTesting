@@ -9,9 +9,11 @@ test("Descripcion del test y resultados que se esperan", () => {
 
 Como recomendacion, una buena practica para escribir nuestros tests es dividirlos en tres partes Given-When-Then o Arrage-Act-Assert.
 ```javascript
+const myfile = require('my-file');
+
 test("Descripcion del test y resultados que se esperan", () => {
     // Given: Defino los objetos que necesito para el test
-    const testee = require('my-file');
+    const testee = myfile.createObject();
 
     // When: Realizo la accion que estoy testeando
     const value = testee.doSomething();
