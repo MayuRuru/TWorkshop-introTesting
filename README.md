@@ -6,9 +6,9 @@ Queremos crear un banco online. Por simplificar el ejemplo, este banco online gu
 
 Tendremos dos partes distintas:
  1. Account. Guarda la informacion de la cuenta en memoria.
- 2. ATM. Permite al usuario modificar la account entity.
+ 2. ATM. Permite al usuario modificar la Account.
 
-![Requisitos de nuestra aplicacion](./img/funcionalidades-cuenta.png)
+![Requisitos de nuestra aplicacion](./img/requisitos.png)
 
 ## Partes del taller
 
