@@ -1,4 +1,4 @@
-# workshop-introduccion-al-testeo-en-javascript
+# Workshop de introduccion al testeo en javascript
 Workshop para introduccion al testeo en Javascript
 
 ## Descripcion
