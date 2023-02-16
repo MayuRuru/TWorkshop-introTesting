@@ -1,14 +1,17 @@
-let amount = 0;
+function openAccount () {
+  let amount = 0;
 
-function getAmount() {
-  return amount;
-}
-
-function setAmount(value) {
-    if(isNaN(value)) {
-        throw new Error('Please introduce a number');
+  return {
+    getAmount: () => {
+      return amount;
+    },
+    setAmount: (value) => {
+      if(isNaN(value)) {
+          throw new Error('Please introduce a number');
+      }
+      amount = value;
     }
-    amount = value;
-}
-  
-module.exports = {getAmount, setAmount}
+  };
+};
+
+module.exports = {openAccount}
