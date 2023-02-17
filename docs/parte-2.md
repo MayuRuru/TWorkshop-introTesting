@@ -36,11 +36,11 @@ Escribimos el primer test en nuestro `account.test.js`. Recordad que estamos hac
 1. Given I open an account, When I call getAmount(), Then it returns 0
 
 ```javascript
-const testee = require('./account.js');
+const Account = require('./account.js');
 
 test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
     // Given: Objetos que estamos usando en nuestro test
-    testee = account.openAccount();
+    testee = new Account();
 
     // When: Accion que estamos testeando
     const value = testee.getAmount();
@@ -52,15 +52,13 @@ test("Given I open an account, When I call getAmount(), Then it returns 0", () =
 
 2. Escribimos el codigo minimo necesario en `account.js` para hacer que pase:
 ```javascript
-function openAccount() {
-  return {
-    getAmount: () => {
+class Account {
+  getAmount () {
       return 0;
-    }
-  };
+  }
 }
 
-module.exports = {openAccount}
+module.exports = Account
 ```
 
 Con esto ya deberiamos de tener un test funcionando.

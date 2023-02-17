@@ -1,8 +1,8 @@
-const account = require('./account.js');
+const Account = require('./account.js');
 
 test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     const value = testee.getAmount();
@@ -13,7 +13,7 @@ test("Given I open an account, When I call getAmount(), Then it returns 0", () =
 
 test("Given I open an account, When I call setAmount with 10, Then getAmount should return 10", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     testee.setAmount(10);
@@ -24,7 +24,7 @@ test("Given I open an account, When I call setAmount with 10, Then getAmount sho
 
 test("Given I open an account, When I set value that is not a number, Then it should throw and error", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     action = () => {
@@ -37,7 +37,7 @@ test("Given I open an account, When I set value that is not a number, Then it sh
 
 test("Given I open an account, When I call getBlockAccount, I expect it to return false by default", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     const value = testee.getBlockAccount();
@@ -48,7 +48,7 @@ test("Given I open an account, When I call getBlockAccount, I expect it to retur
 
 test("Given I open an account, When I call blockAccount, I expect getBlockAccount to return true", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     testee.blockAccount();
@@ -59,7 +59,7 @@ test("Given I open an account, When I call blockAccount, I expect getBlockAccoun
 
 test("Given I open an account, When I call blockAccount, I expect that calling setAmount with a number to return an error", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     testee.blockAccount();

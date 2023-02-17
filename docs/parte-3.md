@@ -6,33 +6,34 @@ Con esto lo unico que estamos testeando es que por defecto no tengo dinero en mi
 
 ```javascript
 test("Given I open an account, When I call setAmount with 10, Then getAmount should return 10", () => {
-    // Given: Objetos que estamos usando en nuestro test
-    testee = account.openAccount();
+    // Given
+    testee = new Account();
 
-    // When: Accion que estamos testeando
+    // When
     testee.setAmount(10);
 
-    // Then: Expectativas
+    // Then
     expect(testee.getAmount()).toBe(10);
 });
 ```
 
 2. Escribimos el codigo que haga que esto funcione
 ```javascript
-function openAccount () {
-  let amount = 0;
+class Account {
+  constructor() {
+    this.amount = 0;
+  }
 
-  return {
-    getAmount: () => {
-      return amount;
-    },
-    setAmount: (value) => {
-      amount = value;
-    }
-  };
+  getAmount () {
+      return this.amount;
+  }
+
+  setAmount (value) {
+      this.amount = value;
+  }
 };
 
-module.exports = {openAccount}
+module.exports = Account
 ```
 
 3. Escribimos otro test para lanzar un error si se intentar llamar a setAmount con algo que no sea un numero.
@@ -40,7 +41,7 @@ module.exports = {openAccount}
 ```javascript
 test("Given I open an account, When I set value that is not a number, Then it should throw and error", () => {
     // Given: Objetos que estamos usando en nuestro test
-    testee = account.openAccount();
+    testee = new Account();
 
     // When: Accion que estamos testeando
     action = () => {
@@ -54,21 +55,16 @@ test("Given I open an account, When I set value that is not a number, Then it sh
 4. Y cuando lo veamos fallar, escribimos en codigo que lo haga funcionar:
 
 ```javascript
-function openAccount () {
-  let amount = 0;
+class Account {
+  // [...] codigo de constructor y getAmount
 
-  return {
-    getAmount: () => {
-      return amount;
-    },
-    setAmount: (value) => {
+  setAmount (value) {
       if(isNaN(value)) {
           throw new Error('Please introduce a number');
       }
-      amount = value;
-    }
-  };
+      this.amount = value;
+  }
 };
 
-module.exports = {openAccount}
+module.exports = Account
 ```

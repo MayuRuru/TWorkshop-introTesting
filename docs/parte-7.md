@@ -1,10 +1,13 @@
 ## Parte 7. Preparando nuestros test para futuros cambios
 La persona encargada del proyecto nos llama y nos dice que para promocionar nuestro nuevo banco, por defecto cuando se cree una account, esta tendra 5 euros.
 
-Si cambiamos nuestra openAccount, quedaria asi:
+Si cambiamos nuestra Account, quedaria asi:
 ```javascript
-function openAccount () {
-    let amount = 5;
+class Account {
+  constructor() {
+    this.amount = 5;
+    this.isAccountBlocked = false;
+  }
     // [...] Resto del codigo
 }
 ```
@@ -16,7 +19,7 @@ Primero lo primero: Vamos a arreglar nuestro `account.test.js` ya que si es corr
 ```javascript
 test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     const value = testee.getAmount();
@@ -38,20 +41,15 @@ Esto nos da mucha mas flexibilidad en el codigo ya que podriamos modificar disti
 
 Como escribir los tests usando mocks. Primero, tenemos que decirle a nuestros test que usen una copia false de `./account.js`.
 ```javascript
-const atm = require('./atm.js');
+const Atm = require('./atm.js');
 require('./account.js');
 
-const mockGetAmount = jest.fn(() => 0);
-const mockSetAmount = jest.fn(() => {});
+let mockGetAmount = jest.fn(() => 0);
+let mockSetAmount = jest.fn(() => {});
 jest.mock('./account.js', () => {
-    return {
-        openAccount: jest.fn(() => {
-            return {
-                getAmount: mockGetAmount,
-                setAmount: mockSetAmount
-            }
-        }),
-    };
+  return jest.fn().mockImplementation(() => {
+    return { getAmount: mockGetAmount, setAmount: mockSetAmount };
+  });
 });
 ```
 
@@ -59,11 +57,9 @@ Luego, en mi primer test, pongo el resultado que espero que me devuelva y ademas
 ```javascript
 test("When I ask for account information, I expect to get a json with the expected information", () => {
     // Given
-    const testee = atm.startAtmForAccount()
-
+    const testee = new Atm();
     // When
     const value = testee.getAccountInformation();
-
     //Then
     expect(value).toStrictEqual({ amount: 0, isblocked: false });
     expect(mockGetAmount).toHaveBeenCalled();
@@ -73,13 +69,11 @@ test("When I ask for account information, I expect to get a json with the expect
 En mi segundo test, cuando se llama a makeDeposit, cambio mi expect a que lo que espero que se llame a setAmount. 
 
 ```javascript
-test("When I call makeDeposit and then I call getAccountInformation, I expect setAmount to have been called with 20", () => {
+test("When I call makeDeposit and then I call getAccountInformation, I expect to get a json with the expected information", () => {
     // Given
-    const testee = atm.startAtmForAccount()
-
+    const testee = new Atm();
     // When
     testee.makeDeposit(20);
-
     //Then
     expect(mockSetAmount).toHaveBeenCalledWith(20);
 });

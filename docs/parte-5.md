@@ -5,7 +5,7 @@ El test seria el siguiente:
 ```javascript
 test("Given I open an account, When I call getBlockAccount, I expect it to return false by default", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     const value = testee.getBlockAccount();
@@ -17,26 +17,14 @@ test("Given I open an account, When I call getBlockAccount, I expect it to retur
 
 La solucion seria la siguiente:
 ```javascript
-function openAccount () {
-  let amount = 0;
-
-  return {
-    getAmount: () => {
-      return amount;
-    },
-    setAmount: (value) => {
-      if(isNaN(value)) {
-          throw new Error('Please introduce a number');
-      }
-      amount = value;
-    },
-    getBlockAccount: () => {
-      return false;
-    }
-  };
+class Account {
+  // [...] codigo de Account
+  getBlockAccount() {
+    return false;
+  }
 };
 
-module.exports = {openAccount}
+module.exports = Account
 ```
 
 2. Cuando llamo a blockAccount, Espero que getBlockAccount devuelva true
@@ -44,7 +32,7 @@ El test seria el siguiente:
 ```javascript
 test("Given I open an account, When I call blockAccount, I expect getBlockAccount to return true", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     testee.blockAccount();
@@ -56,30 +44,24 @@ test("Given I open an account, When I call blockAccount, I expect getBlockAccoun
 
 La solucion seria la siguiente:
 ```javascript
-function openAccount () {
-  let amount = 0;
-  let isAccountBlocked = false;
+class Account {
+  constructor() {
+    this.amount = 0;
+    this.isAccountBlocked = false;
+  }
 
-  return {
-    getAmount: () => {
-      return amount;
-    },
-    setAmount: (value) => {
-      if(isNaN(value)) {
-          throw new Error('Please introduce a number');
-      }
-      amount = value;
-    },
-    getBlockAccount: () => {
-      return isAccountBlocked;
-    },
-    blockAccount: () => {
-      isAccountBlocked = true;
-    }
-  };
+  // Codigo de setAmount y getAmount
+
+  blockAccount () {
+    this.isAccountBlocked = true;
+  }
+
+  getBlockAccount() {
+    return this.isAccountBlocked;
+  }
 };
 
-module.exports = {openAccount}
+module.exports = Account
 ```
 
 3. Cuando llamo a blockAccount y luego llamo a setAmount con un numero, Espero recibir un error.
@@ -88,7 +70,7 @@ El test seria el siguiente:
 ```javascript
 test("Given I open an account, When I call blockAccount, I expect that calling setAmount with a number to return an error", () => {
     // Given
-    testee = account.openAccount();
+    testee = new Account();
 
     // When
     testee.blockAccount();
@@ -100,20 +82,16 @@ test("Given I open an account, When I call blockAccount, I expect that calling s
 
 La solucion seria la siguiente:
 ```javascript
-function openAccount () {
-  // [...] Codigo de openAccount
-  return {
-    setAmount: (value) => {
-      if(isAccountBlocked) {
+class Account {
+  // [...] constructor y otras funciones
+  setAmount (value) {
+      if(this.isAccountBlocked) {
         throw new Error('Account is blocked');
       }
       if(isNaN(value)) {
           throw new Error('Please introduce a number');
       }
-      amount = value;
-    }
-    // [...] otras funciones
+      this.amount = value;
   }
 }
-// [...] Codigo de account
 ```
