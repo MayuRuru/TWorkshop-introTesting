@@ -1,6 +1,6 @@
 const Account = require('./account.js');
 
-test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
+test("Given I have a new account, When I call getAmount(), Then it returns 0", () => {
     // Given: Objetos que estamos usando en nuestro test
     testee = new Account();
 

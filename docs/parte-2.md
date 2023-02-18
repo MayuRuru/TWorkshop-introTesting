@@ -9,17 +9,17 @@ test("Descripcion del test y resultados que se esperan", () => {
 
 Como recomendacion, una buena practica para escribir nuestros tests es dividirlos en tres partes Given-When-Then o Arrage-Act-Assert.
 ```javascript
-const myfile = require('my-file');
+const Calculadora = require('calculadora');
 
-test("Descripcion del test y resultados que se esperan", () => {
+test("GIVEN tengo una calculadora, WHEN sumo 1 y 2, THEN deberia de devolver 3", () => {
     // Given: Defino los objetos que necesito para el test
-    const testee = myfile.createObject();
+    const testee = new Calculadora();
 
     // When: Realizo la accion que estoy testeando
-    const value = testee.doSomething();
+    const value = testee.suma(1, 2);
 
     // Then: Escribo lo que espero que suceda en mi test
-    expect(value).toBe(expectedValue);
+    expect(value).toBe(3);
 })
 ```
 
@@ -33,12 +33,12 @@ expect(arrayValue).toContain(expectedValue);
 ```
 
 Escribimos el primer test en nuestro `account.test.js`. Recordad que estamos haciendo TDD, asi que lo primero es escribir el test
-1. Given I open an account, When I call getAmount(), Then it returns 0
+1. Given I have a new account, When I call getAmount(), Then it returns 0
 
 ```javascript
 const Account = require('./account.js');
 
-test("Given I open an account, When I call getAmount(), Then it returns 0", () => {
+test("Given I have a new account, When I call getAmount(), Then it returns 0", () => {
     // Given: Objetos que estamos usando en nuestro test
     testee = new Account();
 

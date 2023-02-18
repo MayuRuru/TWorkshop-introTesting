@@ -10,7 +10,7 @@ Primero escribimos el test en `atm.test.js`
 ```javascript
 const Atm = require('./atm.js');
 
-test("When I ask for account information, I expect to get a json with the expected information", () => {
+test("When I ask for account information, I expect to get an object with the expected information", () => {
     // Given
     const testee = new Atm();
     // When
@@ -22,8 +22,6 @@ test("When I ask for account information, I expect to get a json with the expect
 
 Y escribimos el codigo para que funcione:
 ```javascript
-const Account = require('./account.js');
-
 class Atm {
   getAccountInformation() {
     return { amount: 0, isblocked: false }
