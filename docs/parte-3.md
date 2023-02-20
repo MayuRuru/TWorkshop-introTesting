@@ -36,7 +36,7 @@ class Account {
 module.exports = Account
 ```
 
-3. Escribimos otro test para lanzar un error si se intentar llamar a setAmount con algo que no sea un numero.
+3. Escribimos otro test en el que esperamos que se lance un error si se intentar llamar a setAmount con algo que no sea un numero.
 
 ```javascript
 test("Given I have a new account, When I set value that is not a number, Then it should throw and error", () => {

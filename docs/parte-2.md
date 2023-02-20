@@ -27,7 +27,7 @@ Hay distintas comprobaciones que `expect` nos permite hacer y que [estan documen
 ```javascript
 expect(value).not.toBe(expectedValue);
 
-expect(action).toThrow(Error);
+expect(() => { myFunction() }).toThrow();
 
 expect(arrayValue).toContain(expectedValue);
 ```
