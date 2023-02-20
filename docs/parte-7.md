@@ -12,7 +12,7 @@ class Account {
 }
 ```
 
-Ahora podemos correr nuestros tests para ver que requisitos han cambiado, vemos que no solo fallan los tests de Account, si no tambien de Atm!
+Ahora podemos correr nuestros tests para ver que requisitos han cambiado, vemos que no solo fallan los tests de Account, sino tambien de Atm!
 
 Primero lo primero: Vamos a arreglar nuestro `account.test.js` ya que si es correcto que fallen porque los requisitos han cambiado:
 
@@ -53,7 +53,7 @@ jest.mock('./account.js', () => {
 });
 ```
 
-Luego, en mi primer test, pongo el resultado que espero que me devuelva y ademas, compruevo que se esta llamando a `getAmountMock`.
+Luego, en mi primer test, pongo el resultado que espero que me devuelva y ademas, compruebo que se esta llamando a `getAmountMock`.
 ```javascript
 test("When I ask for account information, I expect to get a json with the expected information", () => {
     // Given
