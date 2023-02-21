@@ -31,11 +31,11 @@ test("Given I open an account, When I call getAmount(), Then it returns 0", () =
 
 Por otro lado, vemos que los requisitos de atm no han cambiado, pero nuestros tests estan fallando!
 
-Cuando hacemos un cambio en un fichero, no queremos que todos los tests que lo tienen como dependencia fallen. Seria muy caro de arreglar si tenemos que cambiar todo lo que usa esa dependencia. 
+Cuando hacemos un cambio en un fichero, no queremos que todos los tests que lo tienen como dependencia fallen. Ahora mismo solo Atm depende de Account, pero imaginaros que tenemos una aplicacion con varias clases que dependen de Account: necesitariamos mucho tiempo para arreglar todos los tests que fallen y todo por un simple cambio.
 
-En lugar de eso, lo que deberiamos de hacer es que nuestro codigo no dependa directamente de ficheros que pueden cambiar, si no de "copias" que funcionan de forma parecida. Para esto usamos mocks.
+En lugar de eso, lo que deberiamos de hacer es que la clase que estamos testeando no tenga directamente ninguna dependencia en nuestros tests, si no que dependa de "copias" que funcionan de forma parecida. En nuestro caso, queremos que Atm use una copia de Account, pero no account directamente. Para esto usamos mocks. [Mira el ejemplo de mocks en la documentacion oficial de Jest](https://jestjs.io/docs/mock-functions#mocking-modules).
 
-Un mock permite testear como el codigo se comunica entre si. Asi, en nuestro caso de la ATM, lo correcto seria testear que esta llamando a `account.getAmount()` cuando se le pide la informacion y que devuelve lo que sea que devuelva esa funcion.
+Un mock permite testear como el codigo se comunica entre si. En el caso de la Atm, lo correcto seria testear que al llamar a `getAccountInformation()` esta funcion esta llamando a `account.getAmount()` y que devuelve lo que sea que devuelva esa funcion.
 
 Esto nos da mucha mas flexibilidad en el codigo ya que podriamos modificar distintos ficheros sin miedo a que los tets de otros ficheros fallen.
 
