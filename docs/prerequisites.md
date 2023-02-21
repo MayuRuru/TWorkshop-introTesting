@@ -8,3 +8,6 @@ Al descargar node, nos estaremos descargando tambien la herramienta `npm`.
 ```bash
 npm install -g npm
 ```
+
+## Opcional
+Como consejo, recomiendo usar la herramienta [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) para manejar la version de node en distintos proyectos. 
