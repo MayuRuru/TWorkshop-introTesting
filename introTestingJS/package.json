@@ -1,0 +1,14 @@
+{
+  "name": "introtestingjs",
+  "version": "1.0.0",
+  "description": "A TW hands-on workshop on JS Testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
